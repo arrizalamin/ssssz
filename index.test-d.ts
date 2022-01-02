@@ -1,8 +1,10 @@
-import { add, div, greaterThan, lessThan, multiply, subtract } from ".";
+import { add, div, greaterThan, lessThan, multiply, Range, subtract } from ".";
 
 const expectType = <T>(t: T): void => {};
 
 expectType<7>(add(3, 4));
+// @ts-expect-error
+expectType<10>(add(3, 4));
 expectType<1>(add(-3, 4));
 expectType<["Neg", 1]>(add(3, -4));
 expectType<["Neg", 7]>(add(-3, -4));
@@ -27,3 +29,9 @@ expectType<false>(lessThan(7, 4));
 
 expectType<false>(greaterThan(3, 4));
 expectType<true>(greaterThan(7, 4));
+
+const isNumberInRange = <N extends Range<3, 7>[number]>(n: N): boolean =>
+  n >= 3 && n < 7;
+isNumberInRange(5);
+// @ts-expect-error
+isNumberInRange(9);

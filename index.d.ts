@@ -200,3 +200,20 @@ export function greaterThan<A extends number, B extends number>(
   a: A,
   b: B
 ): GreaterThan<A, B>;
+
+export type PeanoRange<
+  Result extends Peano[],
+  Length extends number
+> = Result["length"] extends Length
+  ? Result
+  : Result extends [...infer _, infer L]
+  ? PeanoRange<[...Result, Succ<L>], Length>
+  : never;
+
+export type FromPeanoRange<R extends Peano[]> = {
+  [I in keyof R]: FromPeano<R[I]>;
+};
+
+export type Range<Bottom extends number, Top extends number> = FromPeanoRange<
+  PeanoRange<[ToPeano<Bottom>], Subtract<Top, Bottom>>
+>;
