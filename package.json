@@ -1,0 +1,11 @@
+{
+  "name": "ssssz",
+  "description": "Type arithmetic in typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Arrizal Amin",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
+}
